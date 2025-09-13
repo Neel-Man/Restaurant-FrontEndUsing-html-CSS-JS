@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | The Royal Spice</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">The Royal Spice</a>
+            </div>
+            <div class="hamburger">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+            <ul class="nav-list">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="about.html" class="active">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="content-page">
+        <section class="content-section">
+            <h1>Our Story</h1>
+            <p>Founded in 2010, The Royal Spice was born from a passion for authentic Indian cuisine. Our founder, Chef Arjun Sharma, traveled across India to learn the secrets of regional cooking, from the rich curries of the north to the vibrant spices of the south. Our mission is to bring these timeless flavors to your table, prepared with care, passion, and the finest ingredients.</p>
+            <p>We believe that food is an experience that brings people together. At The Royal Spice, we are not just serving meals; we are creating memories. Thank you for being a part of our journey.</p>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2025 The Royal Spice. All Rights Reserved.</p>
+    </footer>
+    
+    <script>
+        const hamburger = document.querySelector('.hamburger');
+        const navList = document.querySelector('.nav-list');
+
+        hamburger.addEventListener('click', () => {
+            navList.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

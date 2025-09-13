@@ -1,0 +1,339 @@
+/* --- General Styling & Variables --- */
+:root {
+    --primary-color: #c0392b;
+    --secondary-color: #2c3e50;
+    --background-color: #fdfaf6;
+    --text-color: #34495e;
+    --light-text-color: #ecf0f1;
+    --border-color: #ddd;
+    --shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* --- Navigation Bar --- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--secondary-color);
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo a {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.nav-list {
+    display: flex;
+    list-style: none;
+}
+
+.nav-list li {
+    margin-left: 2rem;
+}
+
+.nav-list a {
+    color: var(--light-text-color);
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+.nav-list a.active, .nav-list a:hover {
+    color: var(--primary-color);
+}
+
+.hamburger {
+    display: none;
+    cursor: pointer;
+    flex-direction: column;
+}
+
+.hamburger .line {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 4px 0;
+    transition: all 0.3s ease;
+}
+
+/* --- Hero Section (Home Page) --- */
+.hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=1981&auto=format&fit=crop') no-repeat center center/cover;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+}
+
+.hero-content p {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.btn {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1rem 2rem;
+    text-decoration: none;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #a5281b;
+}
+
+.info-section {
+    padding: 4rem 2rem;
+    text-align: center;
+    max-width: 800px;
+    margin: auto;
+}
+
+/* --- General Content Pages (About, Contact) --- */
+.content-page {
+    padding: 4rem 2rem;
+    min-height: 70vh;
+}
+
+.content-section {
+    max-width: 800px;
+    margin: auto;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+
+.content-section h1 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+
+.contact-info p {
+    margin-bottom: 1rem;
+}
+.contact-info a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+/* --- Menu Page --- */
+.menu-page-main {
+    padding: 2rem;
+}
+
+.page-title {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--primary-color);
+}
+
+.menu-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.menu-items {
+    flex: 3; /* Takes 3/4 of the space */
+    min-width: 300px;
+}
+
+.menu-items h2 {
+    color: var(--secondary-color);
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 0.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.menu-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    background-color: #fff;
+    border-bottom: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+.menu-item:hover {
+    background-color: #f9f9f9;
+    transform: scale(1.02);
+}
+
+.menu-item .price {
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+/* --- Order Summary --- */
+.order-summary {
+    flex: 1; /* Takes 1/4 of the space */
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    min-width: 280px;
+    position: sticky;
+    top: 100px; /* Aligns with navbar height */
+}
+
+.order-summary h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+#order-list {
+    list-style: none;
+    max-height: 40vh;
+    overflow-y: auto;
+}
+
+#order-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px dashed var(--border-color);
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+}
+
+.quantity-controls span {
+    padding: 0 0.75rem;
+}
+
+.quantity-btn {
+    background: var(--secondary-color);
+    color: white;
+    border: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.total-cost {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 2px solid var(--secondary-color);
+    text-align: right;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+#place-order-btn {
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.order-message {
+    text-align: center;
+    margin-top: 1rem;
+    font-weight: bold;
+}
+
+
+/* --- Footer --- */
+.site-footer {
+    background-color: var(--secondary-color);
+    color: var(--light-text-color);
+    text-align: center;
+    padding: 1.5rem 0;
+    margin-top: 2rem;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .logo {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+    
+    .hamburger.active .line:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    .hamburger.active .line:nth-child(2) {
+        opacity: 0;
+    }
+    .hamburger.active .line:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+    }
+
+    .nav-list {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+        background-color: var(--secondary-color);
+    }
+
+    .nav-list.active {
+        display: flex;
+    }
+
+    .nav-list li {
+        margin: 1rem 0;
+    }
+
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-content p {
+        font-size: 1.2rem;
+    }
+
+    .menu-container {
+        flex-direction: column;
+    }
+    
+    .order-summary {
+        position: static;
+        margin-top: 2rem;
+    }
+}

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Menu | The Royal Spice</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">The Royal Spice</a>
+            </div>
+            <div class="hamburger">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+            <ul class="nav-list">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html" class="active">Menu</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="menu-page-main">
+        <h1 class="page-title">Our Menu</h1>
+        <div class="menu-container">
+            <div class="menu-items">
+                <!-- Meals Section -->
+                <h2>Meals</h2>
+                <div class="menu-item" data-name="Vegetarian Thali" data-price="250">
+                    <p>Vegetarian Thali</p>
+                    <p class="price">₹250</p>
+                </div>
+                <div class="menu-item" data-name="Non-Vegetarian Thali" data-price="350">
+                    <p>Non-Vegetarian Thali</p>
+                    <p class="price">₹350</p>
+                </div>
+                
+                <!-- Main Course Section -->
+                <h2>Main Course</h2>
+                <div class="menu-item" data-name="Paneer Butter Masala" data-price="280">
+                    <p>Paneer Butter Masala</p>
+                    <p class="price">₹280</p>
+                </div>
+                <div class="menu-item" data-name="Chicken Tikka Masala" data-price="380">
+                    <p>Chicken Tikka Masala</p>
+                    <p class="price">₹380</p>
+                </div>
+                <div class="menu-item" data-name="Dal Makhani" data-price="220">
+                    <p>Dal Makhani</p>
+                    <p class="price">₹220</p>
+                </div>
+                <div class="menu-item" data-name="Mutton Rogan Josh" data-price="450">
+                    <p>Mutton Rogan Josh</p>
+                    <p class="price">₹450</p>
+                </div>
+
+                <!-- Breads Section -->
+                <h2>Breads</h2>
+                <div class="menu-item" data-name="Tandoori Roti" data-price="30">
+                    <p>Tandoori Roti</p>
+                    <p class="price">₹30</p>
+                </div>
+                <div class="menu-item" data-name="Butter Naan" data-price="50">
+                    <p>Butter Naan</p>
+                    <p class="price">₹50</p>
+                </div>
+                <div class="menu-item" data-name="Garlic Naan" data-price="60">
+                    <p>Garlic Naan</p>
+                    <p class="price">₹60</p>
+                </div>
+
+                <!-- Rice Section -->
+                <h2>Rice</h2>
+                <div class="menu-item" data-name="Steamed Rice" data-price="120">
+                    <p>Steamed Rice</p>
+                    <p class="price">₹120</p>
+                </div>
+                <div class="menu-item" data-name="Jeera Rice" data-price="150">
+                    <p>Jeera Rice</p>
+                    <p class="price">₹150</p>
+                </div>
+                <div class="menu-item" data-name="Chicken Biryani" data-price="320">
+                    <p>Chicken Biryani</p>
+                    <p class="price">₹320</p>
+                </div>
+            </div>
+
+            <div class="order-summary">
+                <h2>Your Order</h2>
+                <ul id="order-list">
+                    <!-- Order items will be added here by JavaScript -->
+                </ul>
+                <div class="total-cost">
+                    <h3>Total: ₹<span id="total-cost">0.00</span></h3>
+                </div>
+                 <button id="place-order-btn" class="btn">Place Order</button>
+                 <p id="order-message" class="order-message"></p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2025 The Royal Spice. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuItems = document.querySelectorAll('.menu-item');
+            const orderList = document.getElementById('order-list');
+            const totalCostEl = document.getElementById('total-cost');
+            const placeOrderBtn = document.getElementById('place-order-btn');
+            const orderMessage = document.getElementById('order-message');
+
+            let order = {};
+
+            menuItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const name = item.dataset.name;
+                    const price = parseFloat(item.dataset.price);
+
+                    if (order[name]) {
+                        order[name].quantity++;
+                    } else {
+                        order[name] = { price: price, quantity: 1 };
+                    }
+                    updateOrder();
+                });
+            });
+
+            function updateOrder() {
+                orderList.innerHTML = '';
+                let total = 0;
+
+                for (const name in order) {
+                    const item = order[name];
+                    total += item.price * item.quantity;
+
+                    const listItem = document.createElement('li');
+                    listItem.innerHTML = `
+                        <span>${name}</span>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn" data-name="${name}" data-action="decrease">-</button>
+                            <span>${item.quantity}</span>
+                            <button class="quantity-btn" data-name="${name}" data-action="increase">+</button>
+                        </div>
+                        <span>₹${(item.price * item.quantity).toFixed(2)}</span>
+                    `;
+                    orderList.appendChild(listItem);
+                }
+
+                totalCostEl.textContent = total.toFixed(2);
+                attachQuantityButtonListeners();
+            }
+
+            function attachQuantityButtonListeners() {
+                document.querySelectorAll('.quantity-btn').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const name = e.target.dataset.name;
+                        const action = e.target.dataset.action;
+
+                        if (action === 'increase') {
+                            order[name].quantity++;
+                        } else if (action === 'decrease') {
+                            order[name].quantity--;
+                            if (order[name].quantity === 0) {
+                                delete order[name];
+                            }
+                        }
+                        updateOrder();
+                    });
+                });
+            }
+
+            placeOrderBtn.addEventListener('click', () => {
+                if (Object.keys(order).length === 0) {
+                    orderMessage.textContent = 'Your order is empty!';
+                    orderMessage.style.color = '#e74c3c';
+                } else {
+                    orderMessage.textContent = 'Thank you! Your order has been placed.';
+                    orderMessage.style.color = '#2ecc71';
+                    order = {};
+                    updateOrder();
+                }
+                setTimeout(() => {
+                    orderMessage.textContent = '';
+                }, 3000);
+            });
+            
+            // For mobile nav
+            const hamburger = document.querySelector('.hamburger');
+            const navList = document.querySelector('.nav-list');
+
+            hamburger.addEventListener('click', () => {
+                navList.classList.toggle('active');
+                hamburger.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>
